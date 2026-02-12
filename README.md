@@ -1,6 +1,9 @@
-# OpenClaw_Docker
-Repositório de teste para disponibilizar uma versão segura de teste do OpenClaw pelo Docker
+# OpenClaw Secure Sandbox
+Este repositório fornece o ambiente padronizado para execução do agente autônomo OpenClaw
 
+## Objetivo
+
+Habilitar o uso de Agentes de IA com segurança, utilizando Docker para isolar o processo do sistema operacional hospedeiro. Previnindo riscos de segurança, como leitura de chaves SSH, vazamento de credenciais e modificações no sistema, garantindo que o agente tenha acesso apenas ao diretório de trabalho (`/workspace`) designado.
 
 ## 🔴 CENÁRIO 1: VPS / Nuvem (Por que é proibido?)
 **O Risco:** Superfície de Ataque Exposta.
@@ -30,9 +33,27 @@ Rodar direto no terminal do PC (Windows/Mac/Linux) sem isolamento.
 **A Solução:** Isolamento de Processo.
 O agente roda encapsulado dentro de um container, sem visão do sistema operacional hospedeiro.
 
-- **Segurança:** O agente só exerga a pasta `/workspace` montada explicitamente. Ele não consegue acessar nada que esteja fora do container.
+- **Segurança:** O agente só enxerga a pasta `/workspace` montada explicitamente. Ele não consegue acessar nada que esteja fora do container.
 - **Contenção:** Se o agente executar um comando destrutivo (`rm -rf /`), ele apaga apenas o container (que é descartável), mantendo o computador e arquivos seguros
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/3cb75291-ae45-4793-8573-18ee879728cb">
 </p>
+
+## 🚀 Como Usar (Quickstart)
+
+Siga estes passos para rodar o OpenClaw em ambiente seguro:
+
+1.  **Baixe este repositório** e entre na pasta.
+2.  **Prepare o Ambiente:**
+    * Crie uma pasta chamada `workspace` (é aqui que você colocará os arquivos para a IA ler).
+    * Copie o arquivo `.env.template` para `.env` e adicione sua API Key.
+3.  **Rode o Agente:**
+    ```bash
+    docker compose up -d
+    ```
+4.  **Interaja:**
+    * Acesse o terminal do agente: `docker attach openclaw_sandbox`
+    * Ou acesse via navegador (se configurado): `http://127.0.0.1:18789/`
+
+**Regra:** Nunca coloque chaves, senhas ou dados de clientes dentro da pasta `workspace`. Use dados fictícios para teste.
