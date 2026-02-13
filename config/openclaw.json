@@ -1,0 +1,9 @@
+{
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "openai/gpt-4o"
+      }
+    }
+  }
+}

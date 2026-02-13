@@ -46,7 +46,7 @@ Siga estes passos para rodar o OpenClaw em ambiente seguro:
 
 1.  **Baixe este repositório** e entre na pasta.
 2.  **Prepare o Ambiente:**
-    * Crie uma pasta chamada `workspace` (é aqui que você colocará os arquivos para a IA ler).
+    * Crie uma pasta chamada `workspace` dentro de `/config` (aqui estarão os arquivos que a IA irá ler).
     * Copie o arquivo `.env.template` para `.env` e adicione sua API Key.
 3.  **Rode o Agente:**
     ```bash
@@ -57,3 +57,26 @@ Siga estes passos para rodar o OpenClaw em ambiente seguro:
     * Ou acesse via navegador (se configurado): `http://127.0.0.1:18789/`
 
 **Regra:** Nunca coloque chaves, senhas ou dados de clientes dentro da pasta `workspace`. Use dados fictícios para teste.
+
+## Primeiro Acesso e Autenticação
+
+Ao rodar o container pela primeira vez, o OpenClaw ativará medidas de segurança que exigem aprovação manual. Siga os passos abaixo se encontrar erros de conexão:
+
+### 1. Erro "Unauthorized: Gateway token missing"
+Se a interface web mostrar este erro, significa que ela precisa da senha que você definiu.
+1.  Na interface do OpenClaw, clique no ícone de **Overview**
+2.  No campo **Gateway Token**, digite a senha definida no seu arquivo `.env`
+3.  Salve.
+
+### 2. Erro "Disconnected (1008): Pairing required"
+Este é o bloqueio de segurança do Docker. Como o seu navegador está "fora" do container, o agente exige que você aprove a conexão explicitamente via terminal.
+Mantenha o container rodando, abra um novo terminal na pasta do projeto e execute:
+```bash
+docker exec -it openclaw_sandbox node dist/index.js devices list
+```
+Irá haver uma lista com um ID pendente.
+Copie o ID e execute:
+```bash
+docker exec -it openclaw_sandbox node dist/index.js devices approve SEU_ID_AQUI
+```
+Após aprovar, atualize a página no navegador e a conexão será estabelecida.

@@ -31,7 +31,8 @@ services:
       - ./workspace:/app/workspace:rw
 
       # Config e Dados (Persistência)
-      - ./config:/app/config:rw
+      # Mapeia para a pasta padrão de configuração do usuário node
+      - ./config:/home/node/.openclaw:rw
       - openclaw_data:/app/data:rw
 
     # Limite de Recursos (Evita que o agente trave seu PC em loop infinito)
