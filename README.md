@@ -80,3 +80,20 @@ Copie o ID e execute:
 docker exec -it openclaw_sandbox node dist/index.js devices approve SEU_ID_AQUI
 ```
 Após aprovar, atualize a página no navegador e a conexão será estabelecida.
+
+## Evidências de Segurança
+Abaixo estão alguns testes demonstrando que o agente está totalmente isolado do Host.
+
+### 1. Teste de Isolamento
+O agente enxerga apenas o que é permitido. Listando o diretório workspace inicialmente, o agente confirmou que estava vazio. Apenas após adicionarmos manualmente um arquivo .txt no host, ele teve acesso ao conteúdo.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ae7fffab-ceaa-47cd-b05d-17d8496b89da">
+</p>
+
+### 2. Teste de Identidade
+Ao instruir o agente a sair do diretório de trabalho (cd ..) e questionar sobre o sistema operacional, fica evidente o isolamento. Ele listou a estrutura de arquivos interna do Container (Linux) e não conseguiu acessar o Disco C:, pastas de Usuário ou Desktop do computador real.
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f78416e1-dca7-4406-a531-5be15eb482d8">
+</p>
