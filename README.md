@@ -5,7 +5,7 @@ Este repositório fornece o ambiente padronizado para execução do agente autô
 
 Habilitar o uso de Agentes de IA com segurança, utilizando Docker para isolar o processo do sistema operacional hospedeiro. Previnindo riscos de segurança, como leitura de chaves SSH, vazamento de credenciais e modificações no sistema, garantindo que o agente tenha acesso apenas ao diretório de trabalho (`/workspace`) designado.
 
-## 🔴 CENÁRIO 1: VPS / Nuvem (Por que é proibido?)
+## 🔴 CENÁRIO 1: VPS / Nuvem
 **O Risco:** Superfície de Ataque Exposta.
 Ao rodar o OpenClaw em um servidor nuvem (AWS, DigitalOcean, etc.), você expõe a interface de controle para a internet pública.
 
@@ -16,7 +16,7 @@ Ao rodar o OpenClaw em um servidor nuvem (AWS, DigitalOcean, etc.), você expõe
   <img src="https://github.com/user-attachments/assets/8d36c3ef-861a-4b26-b10a-22cbd23a857a">
 </p>
 
-## 🟡 CENÁRIO 2: Local / Bare Metal (Por que evitar?)
+## 🟡 CENÁRIO 2: Local / Bare Metal
 **O Risco:** Herança de Permissões.
 Rodar direto no terminal do PC (Windows/Mac/Linux) sem isolamento.
 
@@ -29,7 +29,7 @@ Rodar direto no terminal do PC (Windows/Mac/Linux) sem isolamento.
   <img src="https://github.com/user-attachments/assets/a33f0f44-36c8-45c2-b1df-7374cc5b3b77">
 </p>
 
-## 🟢 CENÁRIO 3: Docker Sandbox (O Padrão Seguro)
+## 🟢 CENÁRIO 3: Docker Sandbox
 **A Solução:** Isolamento de Processo.
 O agente roda encapsulado dentro de um container, sem visão do sistema operacional hospedeiro.
 
